@@ -5,10 +5,11 @@ import {
   Monitor, X,Github,
   Linkedin,
   LucideIcon,
-  Instagram
+  Instagram, 
 } from 'lucide-react';
 import Image from 'next/image';
 import ControlCenter from '@/app/components/controlCenter';
+import FinderOverlay from './components/finderoverlay';
 
 
 interface Project {
@@ -50,13 +51,18 @@ const RealisticMacOS: React.FC = () => {
   const [bootProgress, setBootProgress] = useState<number>(0);
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const [isControlCenterOpen, setIsControlCenterOpen] = useState<boolean>(false);
+  const [isPDFViewerOpen, setIsPDFViewerOpen] = useState<boolean>(false);
+  const [isFinderOpen, setIsFinderOpen] = useState<boolean>(false);
 
-  const iconPath = 'png/folder-icon.png';
+
+  const iconPath = 'svg/folder2.svg';
+  const pdfUrl = 'pdf/Arush-Mishra.pdf';
 
   const desktopIcons = [
     { name: 'Projects', iconPath },
     { name: 'Experience', iconPath },
-    { name: 'Contact', iconPath }
+    { name: 'Contact', iconPath },
+    { name: 'Resume', iconPath: 'svg/pdf3.svg' } 
   ];
 
   const projects: Project[] = [
@@ -72,6 +78,23 @@ const RealisticMacOS: React.FC = () => {
     { role: "Full Stack Developer", company: "Allied Technologies", period: "2020-2021", desc: "Created responsive websites" },
     { role: "Front end Developer Intern", company: "IdeaTV NEWS", period: "2019-2019", desc: "Created responsive websites" }
   ];
+
+  const handleOpenPDFViewer: () => void = () => {
+    setIsPDFViewerOpen(true);
+  };
+  
+  const handleClosePDFViewer: () => void = () => {
+    setIsPDFViewerOpen(false);
+  };  
+
+  const handleOpenFinder = () => {
+    setIsFinderOpen(true);
+  };
+
+  const handleCloseFinder = () => {
+    setIsFinderOpen(false);
+  };
+
 
   useEffect(() => {
     const bootTimer = setTimeout(() => {
@@ -111,15 +134,18 @@ const RealisticMacOS: React.FC = () => {
     setNotifications((prev) => [...prev, { id, message }]);
     setTimeout(() => {
       setNotifications((prev) => prev.filter((n) => n.id !== id));
-    }, 5000);
+    }, 3000);
   };
 
   const DockIcon: React.FC<DockIconProps> = ({ icon: Icon, label, bounce = false, customIconSrc }) => (
     <button 
-      onClick={() => {
+    onClick={() => {
+      if (label === "Finder") {
+        handleOpenFinder();
+      } else {
         setActiveWindow(label);
-        addNotification(`Opened ${label}`);
-      }}
+      }
+    }}
       className="group relative flex flex-col items-center"
     >
       <div 
@@ -208,6 +234,7 @@ const RealisticMacOS: React.FC = () => {
   return (
     <div className="h-screen w-full bg-cover bg-center relative overflow-hidden"
          style={{ backgroundImage: `url('png/bg-img3.png')` }}>
+          {isFinderOpen && <FinderOverlay onClose={handleCloseFinder} />}
       <div className="fixed top-4 right-4 space-y-2 z-50">
         {notifications.map(notification => (
           <div 
@@ -242,17 +269,43 @@ const RealisticMacOS: React.FC = () => {
       </div>
 
       <div className="grid grid-cols-8 gap-4 p-6">
-      {desktopIcons.map(({ name, iconPath }) => (
-         <button key={name} className="flex flex-col items-center group" onClick={() => { setActiveWindow(name); addNotification(`Opened ${name}`); }}>
-         <div className="w-16 h-16 flex items-center justify-center rounded-xl group-hover:bg-gray-700/80 transition-colors">
-           <img src={iconPath} alt={`${name} icon`} width={52} height={52} className="w-18 h-18" />
-         </div>
-         <span className="text-sm text-gray-200 font-bold rounded">
-           {name}
-         </span>
-       </button>
-        ))}
-      </div>
+  {desktopIcons.map((icon) => {
+    const { name, iconPath } = icon;
+    return (
+      <button
+        key={name}
+        className="flex flex-col items-center group"
+        onClick={() => {
+          if (name === 'Resume') {
+            handleOpenPDFViewer();
+          } else {
+            setActiveWindow(name);
+          }
+        }}
+      >
+        <div className="w-16 h-16 flex items-center justify-center rounded-xl group-hover:bg-gray-700/80 transition-colors">
+          <img src={iconPath} alt={`${name} icon`} width={52} height={52} className="w-18 h-18" />
+        </div>
+        <span className="text-sm text-gray-200 font-bold rounded">{name}</span>
+      </button>
+    );
+  })}
+</div>
+
+
+      {isPDFViewerOpen && (
+        <Window title="Resume" onClose={handleClosePDFViewer}>
+          <div className="h-full flex justify-center items-center">
+            <iframe 
+              src={pdfUrl} 
+              width="100%" 
+              height="100%" 
+              className="rounded-lg shadow-lg border border-gray-700"
+              title="Resume PDF"
+            />
+          </div>
+        </Window>
+      )}
 
       {activeWindow && (
         <Window title={activeWindow} onClose={() => setActiveWindow(null)}>
