@@ -11,6 +11,7 @@ import Image from 'next/image';
 import ControlCenter from '@/app/components/controlCenter';
 import FinderOverlay from './components/finderoverlay';
 import Spotlight from './components/spotlight';
+import Netflix from './components/netflix';
 
 
 interface Project {
@@ -145,6 +146,8 @@ const RealisticMacOS: React.FC = () => {
     onClick={() => {
       if (label === "Finder") {
         handleOpenFinder();
+      }else if (label === "Music"){
+        setActiveWindow("NetflixClone");
       } else {
         setActiveWindow(label);
       }
@@ -376,7 +379,14 @@ const RealisticMacOS: React.FC = () => {
           </button>
         </div>
       </div>
-    )}
+    )}  
+    {activeWindow === "NetflixClone" && (
+  <Window title="Netflix Clone" onClose={() => setActiveWindow(null)}>
+    <div className="h-full overflow-auto">
+      <Netflix />
+    </div>
+  </Window>
+)}
 
           {activeWindow === "Projects" && (
             <div className="grid grid-cols-2 gap-6">
