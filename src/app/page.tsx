@@ -17,6 +17,7 @@ interface Project {
   title: string;
   tech: string;
   desc: string;
+  url: string;
 }
 
 interface Experience {
@@ -66,10 +67,10 @@ const RealisticMacOS: React.FC = () => {
   ];
 
   const projects: Project[] = [
-    { id: 1, title: "Social Media App", tech: "Angular / Firebase", desc: "Interactive Full Stack platform for sharing posts, liking the post, and replying to the posts" },
-    { id: 2, title: "Food Resturant", tech: "React / Typescript", desc: "Restaurant website with online menu, ordering system, and table reservations" },
-    { id: 3, title: "Bloggin App", tech: "Angular / Firebase", desc: "Content management system for creating, publishing, and managing blog posts" },
-    { id: 4, title: "Portfolio Website", tech: "Angular / Javascript", desc: "Professional portfolio showcasing projects, skills, and experience" }
+    { id: 1, title: "Social Media App", tech: "Angular / Firebase", desc: "Interactive Full Stack platform for sharing posts, liking the post, and replying to the posts", url: "https://socialapp-e5948.web.app"  },
+    { id: 2, title: "Food Resturant", tech: "React / Typescript", desc: "Restaurant website with online menu, ordering system, and table reservations", url: "https://www.alliedtechnologies.io/" },
+    { id: 3, title: "Bloggin App", tech: "Angular / Firebase", desc: "Content management system for creating, publishing, and managing blog posts",url: "https://scribefp-b1d29.firebaseapp.com" },
+    { id: 4, title: "Portfolio Website", tech: "Angular / Javascript", desc: "Professional portfolio showcasing projects, skills, and experience",url: "https://arushmishra-123.web.app" }
   ];
 
   const experience: Experience[] = [
@@ -377,7 +378,10 @@ const RealisticMacOS: React.FC = () => {
           {activeWindow === "Projects" && (
             <div className="grid grid-cols-2 gap-6">
               {projects.map((project) => (
-                <div key={project.id} 
+                <a key={project.id} 
+                href={project.url}
+                target="_blank"
+                rel = "noopener noreferrer"
                 className="p-6 bg-gray-800 rounded-xl shadow-lg border border-gray-700
                   relative overflow-hidden cursor-pointer transition-all duration-300 
                   transform hover:scale-105 hover:shadow-xl hover:shadow-gray-900/50"
@@ -390,7 +394,7 @@ const RealisticMacOS: React.FC = () => {
                   <h3 className="font-bold text-xl text-gray-200">{project.title}</h3>
                   <p className="text-gray-400 text-sm mt-1">{project.tech}</p>
                   <p className="text-gray-300 mt-3">{project.desc}</p>
-                </div>
+                </a>
               ))}
             </div>
           )}
