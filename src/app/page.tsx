@@ -10,6 +10,7 @@ import {
 import Image from 'next/image';
 import ControlCenter from '@/app/components/controlCenter';
 import FinderOverlay from './components/finderoverlay';
+import Spotlight from './components/spotlight';
 
 
 interface Project {
@@ -54,7 +55,8 @@ const RealisticMacOS: React.FC = () => {
   const [isControlCenterOpen, setIsControlCenterOpen] = useState<boolean>(false);
   const [isPDFViewerOpen, setIsPDFViewerOpen] = useState<boolean>(false);
   const [isFinderOpen, setIsFinderOpen] = useState<boolean>(false);
-
+  const [isSpotlightOpen, setIsSpotlightOpen] = useState(false);
+  
 
   const iconPath = 'svg/folder2.svg';
   const pdfUrl = 'pdf/Arush-Mishra.pdf';
@@ -263,7 +265,7 @@ const RealisticMacOS: React.FC = () => {
           <Battery size={20} className="opacity-70" />
           <Wifi size={20} className="opacity-70" />
           <Monitor size={20} className="opacity-70" onClick={() => setIsControlCenterOpen(!isControlCenterOpen)}/>
-          <Search size={20} className="opacity-70" />
+          <Search size={20} className="opacity-70" onClick={() => setIsSpotlightOpen(!isSpotlightOpen)}/>
         
           <span className="font-medium">{currentTime}</span>
         </div>
@@ -315,7 +317,8 @@ const RealisticMacOS: React.FC = () => {
         {/* Profile Section */}
         <div className="flex items-center space-x-6">
           <div className="w-32 h-32 rounded-xl bg-gray-800 flex items-center justify-center border border-gray-700">
-            <User size={64} className="text-gray-400" />
+            {/* <User size={64} className="text-gray-400" /> */}
+            <Image src="/jpg/dp.jpg" alt="Arush Mishra" width={128} height={128} className="object-cover rounded rounded-lg " />
           </div>
           <div>
             <h2 className="text-2xl font-bold text-gray-200">Arush Mishra</h2>
@@ -476,6 +479,9 @@ const RealisticMacOS: React.FC = () => {
           <ControlCenter isVisible={isControlCenterOpen}/>
           </div> 
       )}
+                  {isSpotlightOpen && <Spotlight onClose={() => setIsSpotlightOpen(false)} />}
+
+
     </div>
   );
 };

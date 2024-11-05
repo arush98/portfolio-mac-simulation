@@ -15,7 +15,24 @@
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
+  background-color: var(--bg-color);
+  color: var(--text-color);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+html.dark {
+  --bg-color: #1f2937; /* Dark background */
+  --text-color: #f9fafb; /* Light text */
+  --secondary-bg-color: #374151;
+  --accent-color: #60a5fa;
+  --border-color: #4b5563;
+}
+
+html.light {
+  --bg-color: #f3f4f6; /* Light background */
+  --text-color: #1f2937; /* Dark text */
+  --secondary-bg-color: #e5e7eb;
+  --accent-color: #2563eb;
+  --border-color: #d1d5db;
+}
+

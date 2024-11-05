@@ -21,8 +21,8 @@ const ControlCenter: React.FC<ControlCenterProps> = ({ isVisible }) => {
           width: '100vw',
           height: '100vh',
           backgroundColor: 'black',
-          opacity: (100 - brightness) / 100, // Adjust opacity based on brightness
-          pointerEvents: 'none', // Allows interaction with underlying elements
+          opacity: (100 - brightness) / 100,
+          pointerEvents: 'none',
           zIndex: 40,
         }}
       ></div>
