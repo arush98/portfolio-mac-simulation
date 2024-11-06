@@ -71,7 +71,7 @@ const RealisticMacOS: React.FC = () => {
 
   const projects: Project[] = [
     { id: 1, title: "Social Media App", tech: "Angular / Firebase", desc: "Interactive Full Stack platform for sharing posts, liking the post, and replying to the posts", url: "https://socialapp-e5948.web.app"  },
-    { id: 2, title: "Food Resturant", tech: "React / Typescript", desc: "Restaurant website with online menu, ordering system, and table reservations", url: "https://www.alliedtechnologies.io/" },
+    { id: 2, title: "Netflix Clone", tech: "React / TailwindCss", desc: "Streaming platform UI clone featuring movie listings and watchlist management", url: "https://www.alliedtechnologies.io/" },
     { id: 3, title: "Bloggin App", tech: "Angular / Firebase", desc: "Content management system for creating, publishing, and managing blog posts",url: "https://scribefp-b1d29.firebaseapp.com" },
     { id: 4, title: "Portfolio Website", tech: "Angular / Javascript", desc: "Professional portfolio showcasing projects, skills, and experience",url: "https://arushmishra-123.web.app" }
   ];
@@ -330,10 +330,10 @@ const RealisticMacOS: React.FC = () => {
             <a href="https://github.com/your-profile" target="_blank" rel="noopener noreferrer">
                 <Github className="text-gray-400 hover:text-gray-200 cursor-pointer" />
               </a>
-              <a href="www.linkedin.com/in/arush-mishra" target="_blank" rel="noopener noreferrer">
+              <a href="https://www.linkedin.com/in/arush-mishra" target="_blank" rel="noopener noreferrer">
                 <Linkedin className="text-gray-400 hover:text-gray-200 cursor-pointer" />
               </a>
-              <a href="https://instagram.com/your-profile" target="_blank" rel="noopener noreferrer">
+              <a href="https://instagram.coma/arushology" target="_blank" rel="noopener noreferrer">
                 <Instagram className="text-gray-400 hover:text-gray-200 cursor-pointer" />
               </a>
             </div>
