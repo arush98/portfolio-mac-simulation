@@ -8,7 +8,6 @@ interface ControlCenterProps {
 
 const ControlCenter: React.FC<ControlCenterProps> = ({ isVisible }) => {
     const [brightness, setbrightness] = useState(100);
-
   if (!isVisible) return null;
 
   return (
