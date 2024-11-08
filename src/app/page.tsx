@@ -330,7 +330,7 @@ const RealisticMacOS: React.FC = () => {
             <h2 className="text-2xl font-bold text-gray-200">Arush Mishra</h2>
             <p className="text-gray-400">Full Stack Developer</p>
             <div className="flex space-x-3 mt-4">
-            <a href="https://github.com/your-profile" target="_blank" rel="noopener noreferrer">
+            <a href="#" target="_blank" rel="noopener noreferrer">
                 <Github className="text-gray-400 hover:text-gray-200 cursor-pointer" />
               </a>
               <a href="https://www.linkedin.com/in/arush-mishra" target="_blank" rel="noopener noreferrer">
