@@ -20,6 +20,7 @@ interface Project {
   tech: string;
   desc: string;
   url: string;
+  imgurl: string;
 }
 
 interface Experience {
@@ -70,10 +71,10 @@ const RealisticMacOS: React.FC = () => {
   ];
 
   const projects: Project[] = [
-    { id: 1, title: "Social Media App", tech: "Angular / Firebase", desc: "Interactive Full Stack platform for sharing posts, liking the post, and replying to the posts", url: "https://socialapp-e5948.web.app"  },
-    { id: 2, title: "Netflix Clone", tech: "React / TailwindCss", desc: "Streaming platform UI clone featuring movie listings and watchlist management", url: "https://www.alliedtechnologies.io/" },
-    { id: 3, title: "Bloggin App", tech: "Angular / Firebase", desc: "Content management system for creating, publishing, and managing blog posts",url: "https://scribefp-b1d29.firebaseapp.com" },
-    { id: 4, title: "Portfolio Website", tech: "Angular / Javascript", desc: "Professional portfolio showcasing projects, skills, and experience",url: "https://arushmishra-123.web.app" }
+    { id: 1, title: "Social Media App", tech: "Angular / Firebase", desc: "Interactive Full Stack platform for sharing posts, liking the post, and replying to the posts", url: "https://socialapp-e5948.web.app", imgurl: "/png/social-media.png"  },
+    { id: 2, title: "Netflix Clone", tech: "React / TailwindCss", desc: "Streaming platform UI clone featuring movie listings and watchlist management", url: "https://www.alliedtechnologies.io/", imgurl: "/png/netflix.png" },
+    { id: 3, title: "Blogging App", tech: "Angular / Firebase", desc: "Content management system for creating, publishing, and managing blog posts",url: "https://scribefp-b1d29.firebaseapp.com", imgurl: "/png/scribe-blogging.png" },
+    { id: 4, title: "Portfolio Website", tech: "NextJs / Typescript", desc: "Professional portfolio showcasing projects, skills, and experience",url: "#", imgurl: "/png/mac.png" }
   ];
 
   const experience: Experience[] = [
@@ -144,10 +145,12 @@ const RealisticMacOS: React.FC = () => {
   const DockIcon: React.FC<DockIconProps> = ({ icon: Icon, label, bounce = false, customIconSrc }) => (
     <button 
     onClick={() => {
-      if (label === "Finder") {
+      if (label === "Skills") {
         handleOpenFinder();
-      }else if (label === "Music"){
+      }else if (label === "Netflix"){
         setActiveWindow("NetflixClone");
+      } else if (label === "Browser" || label === "Settings") {
+        setActiveWindow("Coming Soon - " + label);
       } else {
         setActiveWindow(label);
       }
@@ -388,29 +391,36 @@ const RealisticMacOS: React.FC = () => {
   </Window>
 )}
 
-          {activeWindow === "Projects" && (
-            <div className="grid grid-cols-2 gap-6">
-              {projects.map((project) => (
-                <a key={project.id} 
-                href={project.url}
-                target="_blank"
-                rel = "noopener noreferrer"
-                className="p-6 bg-gray-800 rounded-xl shadow-lg border border-gray-700
-                  relative overflow-hidden cursor-pointer transition-all duration-300 
-                  transform hover:scale-105 hover:shadow-xl hover:shadow-gray-900/50"
+{activeWindow === "Projects" && (
+  <div className="grid grid-cols-2 gap-6">
+    {projects.map((project) => (
+      <div
+        key={project.id}
+        onClick={() => {
+          if (project.title === "Netflix Clone") {
+            setActiveWindow("NetflixClone");
+          } else {
+            window.open(project.url, "_blank");
+          }
+        }}
+        className="p-6 bg-gray-800 rounded-xl shadow-lg border border-gray-700
+                   relative overflow-hidden cursor-pointer transition-all duration-300 
+                   transform hover:scale-105 hover:shadow-xl hover:shadow-gray-900/50"
       >
         <div className="absolute inset-0 bg-gradient-to-r from-transparent to-white opacity-0 
                         hover:opacity-20 transform scale-150 -rotate-45 
                         transition duration-500 ease-in-out 
                         hover:translate-x-full"></div>
-
-                  <h3 className="font-bold text-xl text-gray-200">{project.title}</h3>
-                  <p className="text-gray-400 text-sm mt-1">{project.tech}</p>
-                  <p className="text-gray-300 mt-3">{project.desc}</p>
-                </a>
-              ))}
-            </div>
-          )}
+        <div className="mb-4 rounded overflow-hidden">
+          <Image src={project.imgurl} alt={project.title} width={500} height={300} className="rounded-lg object-cover" />
+        </div>
+        <h3 className="font-bold text-xl text-gray-200">{project.title}</h3>
+        <p className="text-gray-400 text-sm mt-1">{project.tech}</p>
+        <p className="text-gray-300 mt-3">{project.desc}</p>
+      </div>
+    ))}
+  </div>
+)}
           {activeWindow === "Experience" && (
             <div className="space-y-6">
               {experience.map((exp, index) => (
@@ -477,12 +487,13 @@ const RealisticMacOS: React.FC = () => {
       <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 
                     bg-gray-800/80 backdrop-blur-xl rounded-2xl p-2 
                     flex items-end space-x-4 shadow-2xl border border-gray-700">
-        <DockIcon customIconSrc="svg/finder-icon.svg" label="Finder" />
+        <DockIcon customIconSrc="svg/finder-icon.svg" label="Skills" />
         <DockIcon icon={User} label="About Me" />
+        <DockIcon customIconSrc="svg/netflix.svg" label="Netflix" />
         <DockIcon customIconSrc="svg/mail-icon.svg" label="Contact" />
         <DockIcon customIconSrc="svg/safari-icon.svg" label="Browser" />
         <DockIcon customIconSrc="svg/settings-icon.svg" label="Settings" />
-        <DockIcon customIconSrc="svg/music-icon.svg" label="Music" />
+        
       </div>
       {isControlCenterOpen && (
         <div className="fixed top-8 right-4 z-50">
