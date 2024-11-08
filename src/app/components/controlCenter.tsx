@@ -104,7 +104,6 @@ const ControlCenter: React.FC<ControlCenterProps> = ({ isVisible }) => {
           <p className="text-xs">Display</p>
         </button>
       </div>
-      
     </div>
     </>
   );
